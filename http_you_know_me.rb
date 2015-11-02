@@ -7,10 +7,11 @@ count = 0
 loop do
 
   client = tcp_server.accept
+  line = client
 
   puts "Sending Response..."
 
-  response = "<pre>" + "Hello_World (#{count})\n Resend request to up counter" + "<pre>"
+  response = "<pre>" + "Hello_World (#{count})\nResend request to up counter" + line + "<pre>"
   output = "<html><head></head><body>#{response}</body></html>"
 
   headers = ["http/1.1 200 ok",
