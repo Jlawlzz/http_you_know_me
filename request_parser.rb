@@ -6,6 +6,7 @@ class RequestParser
   def initialize(request_lines)
     @request_lines = request_lines
     @request_array = []
+    execute
   end
 
   def isolate_verb
@@ -52,6 +53,18 @@ class RequestParser
 
   def parsed_request
     "<pre>\nVerb: #{@request_array[0]}\nPath: #{@request_array[1]}\nProtocol: #{@request_array[2]}\nHost:#{@request_array[3]}\nPort: #{@request_array[4]}\nOrigin: #{@request_array[5]}\nAccept:#{@request_array[6]}\n<pre>"
+  end
+
+  def execute
+    #temporary
+    isolate_verb
+    isolate_path
+    isolate_protocol
+    isolate_host
+    isolate_port
+    isolate_origin
+    isolate_accept
+    parsed_request
   end
 
 end
