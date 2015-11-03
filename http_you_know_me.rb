@@ -1,9 +1,11 @@
 require 'socket'
+require './request_parser'
 
 tcp_server = TCPServer.new(9292)
 
 
-class YouKnowMeServer
+
+# class YouKnowMeServer
 
   count = 0
 
@@ -17,9 +19,19 @@ class YouKnowMeServer
       request_lines << line.chomp
     end
 
+    rp = RequestParser.new(request_lines)
+    rp.isolate_verb
+    rp.isolate_path
+    rp.isolate_protocol
+    rp.isolate_host
+    rp.isolate_port
+    rp.isolate_origin
+    rp.isolate_accept
+    final_parse = rp.parsed_request
+
     puts "Sending Response..."
 
-    response = "<pre>" + "Hello_World (#{count})\nResend request to up counter\n" + request_lines.to_s + "<pre>"
+    response = "<pre>" + "Hello_World (#{count})\nResend request to up counter\n" + final_parse + "<pre>"
     output = "<html><head></head><body>#{response}</body></html>"
 
     headers = ["http/1.1 200 ok",
@@ -36,5 +48,4 @@ class YouKnowMeServer
   end
 
   client.close
-
-end
+# end
