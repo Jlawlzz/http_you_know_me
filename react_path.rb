@@ -4,6 +4,7 @@ class ReactPath
 
   def initialize
     @request_count = 0
+    @dict = File.read("/usr/share/dict/words").split
   end
 
   def route_function(path)
@@ -46,7 +47,11 @@ class ReactPath
    @request_count += 1
   #  word = path.split('?')[1]
     path.slice!("/word_search?word=")
-    path
+    if @dict.include?(path)
+      "#{path} is a word!"
+    else
+      "Go fuck yourself!"
+    end
   end
 
 end
