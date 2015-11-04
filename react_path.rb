@@ -7,17 +7,19 @@ class ReactPath
   end
 
   def route_function(path)
-    case path
-    when '/'
+    if path == '/'
       default_path
-    when '/hello'
+    elsif path == '/hello'
       hello_path
-    when '/datetime'
+    elsif path == '/datetime'
       datetime_path
-    when '/shutdown'
+    elsif path == '/shutdown'
       shutdown_path
+    elsif path[0..11] == '/word_search'
+      word_search(path)
+    else
+      default_path
     end
-    path
   end
 
   def default_path
@@ -38,6 +40,13 @@ class ReactPath
   def shutdown_path
     @request_count +=1
     "Total Requests: #{@request_count}"
+  end
+
+  def word_search(path)
+   @request_count += 1
+  #  word = path.split('?')[1]
+    path.slice!("/word_search?word=")
+    path
   end
 
 end
