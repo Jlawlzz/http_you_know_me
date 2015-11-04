@@ -17,6 +17,7 @@ class ReactPath
     when '/shutdown'
       shutdown_path
     end
+    path
   end
 
   def default_path
@@ -36,7 +37,7 @@ class ReactPath
 
   def shutdown_path
     @request_count +=1
-    "Total Requests: 12"
+    "Total Requests: #{@request_count}"
   end
 
 end
