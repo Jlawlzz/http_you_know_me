@@ -19,8 +19,7 @@ class DefaultFunctions
   end
 
   def shutdown_path(counter)
-    "Total Requests: #{counter}\n
-    Server is now shutdown."
+    "Total Requests: #{counter}\n Server is now shutdown."
   end
 
   def word_search(request_array)

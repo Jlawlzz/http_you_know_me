@@ -1,7 +1,7 @@
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
-require './react_path'
+require '../lib/default_functions'
 
 class ReactPathTest < Minitest::Test
 

@@ -1,7 +1,7 @@
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
-require './request_parser'
+require '../lib/request_parser'
 
 class RequestParserTest < Minitest::Test
 
