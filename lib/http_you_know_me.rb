@@ -1,5 +1,5 @@
 require 'socket'
-require './client_response'
+require '../lib/client_response'
 
 tcp_server = TCPServer.new(9292)
 client_response = ClientResponse.new
@@ -15,6 +15,8 @@ client_response = ClientResponse.new
 
     puts "Sending Response..."
 
+
+    #If Redirect Needs to Happen
     if request_response.include?("Re-Direct")
 
       output = "<html><head></head><body></body></html>"
@@ -35,8 +37,7 @@ client_response = ClientResponse.new
       request_response = client_response.route
     end
 
-    puts "yay"
-
+    #Standard Response
     response = "<pre>" + request_response + "<pre>"
     output = "<html><head></head><body>#{response}</body></html>"
 
@@ -55,15 +56,4 @@ client_response = ClientResponse.new
 
   end
 
-    # response_array = response_formatter(request_response)
-    # response = response_array[0]
-    # output = response_array[1]
-    # headers = response_array[2]
-    #
-
-    # client.puts headers
-    # client.puts output
-  # end
-
   client.close
-# # end

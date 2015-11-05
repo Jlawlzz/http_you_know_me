@@ -1,13 +1,13 @@
-require './router'
-require './request_parser'
-require './default_functions'
-require './game'
+require '../lib/router'
+require '../lib/request_parser'
+require '../lib/default_functions'
+require '../lib/game'
 
 class ClientResponse
 
   include Router
 
-  attr_reader :request_lines, :default_functions, :game
+  attr_reader :request_lines, :default_functions, :game, :request_count
 
   def initialize
     puts "Ready for Request:"

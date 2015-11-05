@@ -1,4 +1,4 @@
-require './client_response'
+require '../lib/client_response'
 
 module Router
 
@@ -28,7 +28,7 @@ module Router
   end
 
   def route_post(request_array, counter)
-    if request_array[1] == '/game_start'
+    if request_array[1] == '/start_game'
       game.start_game
     elsif request_array[1] == '/game'
       game.guess_storage(request_array[-1])

@@ -1,5 +1,3 @@
-require './client_response'
-
 class DefaultFunctions
 
   def initialize
@@ -23,7 +21,6 @@ class DefaultFunctions
   end
 
   def word_search(request_array)
-  #  word = path.split('?')[1]
     request_array[1].slice!("/word_search?word=")
     if @dict.include?(request_array[1])
       "#{request_array[1]} is a word!"
