@@ -1,7 +1,7 @@
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/client_response'
+require '../lib/client_response'
 
 class ClientResponseTest < Minitest::Test
 
