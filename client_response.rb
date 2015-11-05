@@ -1,28 +1,45 @@
-require './react_path'
+require './router'
 require './request_parser'
+require './default_functions'
+require './game'
 
 class ClientResponse
 
-  attr_reader :request_lines, :react_path_obj, :parsed_request
+  include Router
+
+  attr_reader :request_lines, :default_functions, :game
 
   def initialize
     puts "Ready for Request:"
-    @react_path_obj = ReactPath.new
+    @default_functions = DefaultFunctions.new
+    @game = Game.new
   end
 
   def wait_for_response(client)
     @request_lines = []
     while line = client.gets and !line.chomp.empty?
-      request_lines << line.chomp
+     request_lines << line.chomp
+    end
+    if request_lines.join.include?("Content-Type")
+      while line = client.gets and !line.chomp.empty?
+        request_lines << line.chomp
+      end
+      request_lines << client.gets
     end
   end
 
-  def get_parsed_request
-    @parsed_request = RequestParser.new(request_lines)
+  def re_format_request_lines
+    @request_lines.shift
   end
 
-  def react_to_path
-    response = @react_path_obj.route_function(@parsed_request.isolate_path)
-    "#{response}\n\n#{@parsed_request.execute}"
+  def get_parsed_request
+    @request_parser = RequestParser.new(request_lines)
   end
+
+  def route
+    response = route_verb(@request_parser.request_array)
+    "#{response}\n\n#{@request_parser.execute}"
+  end
+
 end
+#

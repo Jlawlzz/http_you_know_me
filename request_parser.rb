@@ -1,7 +1,8 @@
 
+
 class RequestParser
 
-  attr_reader :request_lines
+  attr_reader :request_lines, :request_array
 
   def initialize(request_lines)
     @request_lines = request_lines
@@ -51,6 +52,13 @@ class RequestParser
     accept
   end
 
+  def isolate_guess
+    if @request_array[0] == "POST" && @request_array[1] == "/game"
+      guess = @request_lines[-1].split("\"")[0]
+      @request_array << guess.chomp
+    end
+  end
+
   def parsed_request
     "<pre>\nVerb: #{@request_array[0]}\nPath: #{@request_array[1]}\nProtocol: #{@request_array[2]}\nHost:#{@request_array[3]}\nPort: #{@request_array[4]}\nOrigin: #{@request_array[5]}\nAccept:#{@request_array[6]}\n<pre>"
   end
@@ -64,6 +72,7 @@ class RequestParser
     isolate_port
     isolate_origin
     isolate_accept
+    isolate_guess
     parsed_request
   end
 
