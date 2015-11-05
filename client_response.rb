@@ -13,9 +13,11 @@ class ClientResponse
     puts "Ready for Request:"
     @default_functions = DefaultFunctions.new
     @game = Game.new
+    @request_count = 0
   end
 
   def wait_for_response(client)
+    @request_count += 1
     @request_lines = []
     while line = client.gets and !line.chomp.empty?
      request_lines << line.chomp
@@ -37,7 +39,7 @@ class ClientResponse
   end
 
   def route
-    response = route_verb(@request_parser.request_array)
+    response = route_verb(@request_parser.request_array,@request_count)
     "#{response}\n\n#{@request_parser.execute}"
   end
 

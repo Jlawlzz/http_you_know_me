@@ -7,18 +7,18 @@ class Game
   end
 
   def start_game
-    "Go Fuck Yourself"
+    "Fine. Play the game. Good luck with figuring out the rules."
   end
 
   def guess_eval
     @guess_counter += 1
-    "You have made #{@guess_counter} guesses, you idiot!"
+    game_stats = "You have made #{@guess_counter} guesses, you idiot!"
     if @number_guessed == @number
-      "Your guess was right... yay"
+      game_stats + "\nYour guess was right... yay"
     elsif @number_guessed < @number
-      "Your number is too low, just like your test scores."
+      game_stats + "\nYour number is too low, just like your test scores."
     elsif @number_guessed > @number
-      "Your number is too high, just like your self esteem"
+      game_stats + "\nYour number is too high, just like your self esteem"
     end
   end
 

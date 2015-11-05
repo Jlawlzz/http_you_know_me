@@ -49,6 +49,10 @@ client_response = ClientResponse.new
     client.puts headers
     client.puts output
 
+    if request_response.include?("shutdown")
+      break
+    end
+
   end
 
     # response_array = response_formatter(request_response)

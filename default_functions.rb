@@ -4,14 +4,13 @@ class DefaultFunctions
 
   def initialize
     @dict = File.read("/usr/share/dict/words").split
-    @counter = 0
   end
 
   def default_path
   end
 
-  def hello_path
-    "Hello_World (#{@counter})"
+  def hello_path(counter)
+    "Hello_World (#{counter - 1})"
   end
 
   def datetime_path
@@ -19,8 +18,9 @@ class DefaultFunctions
     time.strftime("%I:%M %p on %A, %B %d, %Y")
   end
 
-  def shutdown_path
-    "Total Requests: #{@counter}"
+  def shutdown_path(counter)
+    "Total Requests: #{counter}\n
+    Server is now shutdown."
   end
 
   def word_search(request_array)
